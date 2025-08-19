@@ -1,8 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-
-const API = import.meta.env.VITE_API_URL ||
-  (typeof window !== 'undefined' && window.API_BASE) ||
-  'http://localhost:3001/api';
+import { API_BASE } from '../config/apiBase.js';
 
 
 export const productsApi = createApi({
