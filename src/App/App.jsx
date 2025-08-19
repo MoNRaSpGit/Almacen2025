@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
 import { HashRouter as BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
 
 
+
 import CodigosBarra from "../pages/CodigosBarra.jsx";
 import Caja from "../pages/Caja.jsx";
 import Estadisticas from "../pages/Estadisticas.jsx";
