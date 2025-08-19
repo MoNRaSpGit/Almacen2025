@@ -1,35 +1,35 @@
+// ✅ Usa HashRouter y evita nombres duplicados
 import { HashRouter as Router, Routes, Route, NavLink } from "react-router-dom";
+
 import CodigosBarra from "../pages/CodigosBarra.jsx";
 import Caja from "../pages/Caja.jsx";
-import Estadisticas from "../pages/Estadisticas.jsx";
 import Productos from "../pages/Productos.jsx";
-
-function Navbar() {
-  return (
-    <nav className="navbar navbar-expand bg-dark navbar-dark">
-      <div className="container">
-        <NavLink to="/" className="navbar-brand">Tienda</NavLink>
-        <div className="navbar-nav">
-          <NavLink to="/" className="nav-link">Códigos</NavLink>
-          <NavLink to="/caja" className="nav-link">Caja</NavLink>
-          <NavLink to="/estadisticas" className="nav-link">Estadísticas</NavLink>
-          <NavLink to="/productos" className="nav-link">Productos</NavLink>
-        </div>
-      </div>
-    </nav>
-  );
-}
+import Estadisticas from "../pages/Estadisticas.jsx";
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<CodigosBarra />} />
-        <Route path="/caja" element={<Caja />} />
-        <Route path="/estadisticas" element={<Estadisticas />} />
-        <Route path="/productos" element={<Productos />} />
-      </Routes>
-    </BrowserRouter>
+    <Router>
+      <nav className="navbar navbar-expand navbar-dark bg-dark">
+        <div className="container">
+          <NavLink className="navbar-brand" to="/">Almacén 2025</NavLink>
+          <div className="navbar-nav">
+            <NavLink className="nav-link" to="/">Códigos</NavLink>
+            <NavLink className="nav-link" to="/caja">Caja</NavLink>
+            <NavLink className="nav-link" to="/productos">Productos</NavLink>
+            <NavLink className="nav-link" to="/estadisticas">Estadísticas</NavLink>
+          </div>
+        </div>
+      </nav>
+
+      <div className="container py-3">
+        <Routes>
+          <Route path="/" element={<CodigosBarra />} />
+          <Route path="/caja" element={<Caja />} />
+          <Route path="/productos" element={<Productos />} />
+          <Route path="/estadisticas" element={<Estadisticas />} />
+          <Route path="*" element={<div>404</div>} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
