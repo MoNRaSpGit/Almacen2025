@@ -1,0 +1,3 @@
+:root { color-scheme: dark; }
+body { margin: 0; min-width: 320px; min-height: 100vh; }
+/* NO tocar .card ni poner body{display:flex} acá */
