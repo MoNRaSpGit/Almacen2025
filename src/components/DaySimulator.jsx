@@ -34,7 +34,7 @@ export default function DaySimulator() {
           className="btn btn-sm btn-outline-secondary"
           onClick={() => setDay(null)}
         >
-          Quitar simulación
+          Quitar simulaciónsss
         </button>
       </div>
 
