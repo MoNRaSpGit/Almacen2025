@@ -5,6 +5,7 @@ import CodigosBarra from "../pages/CodigosBarra.jsx";
 import Caja from "../pages/Caja.jsx";
 import Productos from "../pages/Productos.jsx";
 import Estadisticas from "../pages/Estadisticas.jsx";
+import Tienda from "../pages/Tienda.jsx";
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
             <NavLink className="nav-link" to="/caja">Caja</NavLink>
             <NavLink className="nav-link" to="/productos">Productos</NavLink>
             <NavLink className="nav-link" to="/estadisticas">Estadísticas</NavLink>
+            <NavLink className="nav-link" to="/tienda">Tienda</NavLink>
           </div>
         </div>
       </nav>
@@ -28,6 +30,7 @@ export default function App() {
           <Route path="/productos" element={<Productos />} />
           <Route path="/estadisticas" element={<Estadisticas />} />
           <Route path="*" element={<div>404</div>} />
+          <Route path="/tienda" element={<Tienda />} />
         </Routes>
       </div>
     </Router>
