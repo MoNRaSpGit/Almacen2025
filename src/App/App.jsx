@@ -14,7 +14,7 @@ export default function App() {
         <div className="container">
           <NavLink className="navbar-brand" to="/">Almacén 2025</NavLink>
           <div className="navbar-nav">
-            <NavLink className="nav-link" to="/">Códigos</NavLink>
+            <NavLink className="nav-link" to="/">Códigossssaa</NavLink>
             <NavLink className="nav-link" to="/caja">Caja</NavLink>
             <NavLink className="nav-link" to="/productos">Productos</NavLink>
             <NavLink className="nav-link" to="/estadisticas">Estadísticas</NavLink>
