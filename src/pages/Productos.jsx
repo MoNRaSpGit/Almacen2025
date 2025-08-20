@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import EditablePriceRow from "../components/EditablePriceRow.jsx";
 import EditableDualPriceRow from "../components/EditableDualPriceRow.jsx";
 
@@ -8,8 +8,8 @@ const K_REMEDIOS = "demo-remedios-v1";
 
 // listas por defecto (podés ajustar)
 const DEFAULT_FRUTAS = [
-  { id: 1, name: "Manzana", priceCents: 80_00 /*, imageUrl: "/img/manzana.jpg"*/ },
-  { id: 2, name: "Banana",  priceCents: 80_00 /*, imageUrl: "/img/banana.jpg"*/ },
+  { id: 1, name: "Manzana", priceCents: 80_00 },
+  { id: 2, name: "Banana",  priceCents: 80_00 },
   { id: 3, name: "Durazno", priceCents: 120_00 },
   { id: 4, name: "Naranja", priceCents: 70_00 },
   { id: 5, name: "Cebolla", priceCents: 65_00 },
@@ -18,29 +18,10 @@ const DEFAULT_FRUTAS = [
 
 const DEFAULT_REMEDIOS = [
   { id: 101, name: "E9000",    priceBoxCents: 120_00, priceUnitCents: 80_00 },
-  { id: 102, name: "Aspirina", priceBoxCents: 210_00, priceUnitCents: 18_00 /*, img: "/img/aspirina.png"*/ },
+  { id: 102, name: "Aspirina", priceBoxCents: 210_00, priceUnitCents: 18_00 },
   { id: 103, name: "Actron",   priceBoxCents: 320_00, priceUnitCents: 28_00 },
   { id: 104, name: "Ibuprof.", priceBoxCents: 250_00, priceUnitCents: 22_00 },
 ];
-
-// Helper robusto para detectar si un item tiene imagen (soporta varios nombres de campo)
-function hasImage(item) {
-  const candidates = [
-    item.imagen,
-    item.img,
-    item.image,
-    item.imagenUrl,
-    item.imageUrl,
-    Array.isArray(item.imagenes) && item.imagenes[0],
-    Array.isArray(item.images) && item.images[0],
-    item.foto,
-    item.fotoUrl,
-  ].filter(Boolean);
-
-  return candidates.some((v) =>
-    typeof v === "string" ? v.trim().length > 0 : Boolean(v)
-  );
-}
 
 export default function Productos() {
   const [frutas, setFrutas] = useState(() => {
@@ -70,21 +51,6 @@ export default function Productos() {
     ));
   }
 
-  // ✅ Orden: primero los que tienen imagen (orden estable para no romper el orden entre iguales)
-  const frutasOrdenadas = useMemo(() => {
-    return frutas
-      .map((it, idx) => ({ it, idx, hasImg: hasImage(it) }))
-      .sort((a, b) => (a.hasImg === b.hasImg ? a.idx - b.idx : (a.hasImg ? -1 : 1)))
-      .map(({ it }) => it);
-  }, [frutas]);
-
-  const remediosOrdenados = useMemo(() => {
-    return remedios
-      .map((it, idx) => ({ it, idx, hasImg: hasImage(it) }))
-      .sort((a, b) => (a.hasImg === b.hasImg ? a.idx - b.idx : (a.hasImg ? -1 : 1)))
-      .map(({ it }) => it);
-  }, [remedios]);
-
   return (
     <div className="container py-4">
       <h1 className="h4 mb-4">Productos</h1>
@@ -98,7 +64,7 @@ export default function Productos() {
               <span className="badge text-bg-secondary">{frutas.length}</span>
             </div>
             <ul className="list-group list-group-flush">
-              {frutasOrdenadas.map((item) => (
+              {frutas.map((item) => (
                 <EditablePriceRow key={item.id} item={item} onSave={saveFruta} />
               ))}
             </ul>
@@ -113,7 +79,7 @@ export default function Productos() {
               <span className="badge text-bg-secondary">{remedios.length}</span>
             </div>
             <ul className="list-group list-group-flush">
-              {remediosOrdenados.map((item) => (
+              {remedios.map((item) => (
                 <EditableDualPriceRow key={item.id} item={item} onSave={saveRemedio} />
               ))}
             </ul>
