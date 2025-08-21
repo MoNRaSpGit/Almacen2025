@@ -34,15 +34,21 @@ export default function Tienda() {
   }, [data, isFetching, page]);
 
   // por si el server no ordena, lo aseguramos acá (case-insensitive)
-  const itemsSorted = useMemo(
-    () =>
-      [...items].sort((a, b) =>
-        String(a.name || "").localeCompare(String(b.name || ""), "es", {
-          sensitivity: "base",
-        })
-      ),
-    [items]
-  );
+const itemsSorted = useMemo(() => {
+  return [...items].sort((a, b) => {
+    const aHasImg = a.image_url ? 1 : 0;
+    const bHasImg = b.image_url ? 1 : 0;
+
+    // primero los que tienen imagen
+    if (aHasImg !== bHasImg) return bHasImg - aHasImg;
+
+    // luego orden alfabético
+    return String(a.name || "").localeCompare(String(b.name || ""), "es", {
+      sensitivity: "base",
+    });
+  });
+}, [items]);
+
 
   const hasMore = Array.isArray(data) && data.length === limit;
 
