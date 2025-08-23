@@ -90,49 +90,60 @@ export default function CodigosBarra() {
 
   return (
     <div className="container py-4">
-      <h1 className="h4 mb-3">Lectura de código</h1>
+      <h1 className="h4 mb-3 text-center text-md-start">Lectura de código</h1>
       <DaySimulator />
 
-      <ScanInput
-        ref={inputRef}
-        value={code}
-        onChange={setCode}
-        onSubmit={handleSubmit}
-        isLoading={isFetching}
-      />
+      {/* Input de escaneo ocupa 100% en mobile */}
+      <div className="mb-3">
+        <ScanInput
+          ref={inputRef}
+          value={code}
+          onChange={setCode}
+          onSubmit={handleSubmit}
+          isLoading={isFetching}
+          className="w-100"
+        />
+      </div>
 
       <StatusAlert status={status} />
 
-      {/* Si encontramos producto */}
+      {/* Producto encontrado */}
       {product && (
-        <ProductCard
-          product={product}
-          onUpdated={(p) => setProduct(p)}
-          onStatus={setStatus}
-        />
+        <div className="mb-3">
+          <ProductCard
+            product={product}
+            onUpdated={(p) => setProduct(p)}
+            onStatus={setStatus}
+          />
+        </div>
       )}
 
-      {/* Si no lo encontramos → mostramos alta rápida */}
+      {/* Alta rápida si no lo encontramos */}
       {noEncontradoCode && (
-        <AltaRapidaProducto
-          barcode={noEncontradoCode}
-          onCancel={() => setNoEncontradoCode(null)}
-          onCreated={(nuevo) => {
-            setProduct(nuevo); // lo mostramos al instante
-            setStatus({ type: "ok", msg: `Producto creado: ${nuevo.name}` });
-            setNoEncontradoCode(null);
-            add(nuevo); // lo mandamos al ticket actual
-          }}
-        />
+        <div className="mb-3">
+          <AltaRapidaProducto
+            barcode={noEncontradoCode}
+            onCancel={() => setNoEncontradoCode(null)}
+            onCreated={(nuevo) => {
+              setProduct(nuevo);
+              setStatus({ type: "ok", msg: `Producto creado: ${nuevo.name}` });
+              setNoEncontradoCode(null);
+              add(nuevo);
+            }}
+          />
+        </div>
       )}
 
-      <ScannedList
-        items={items}
-        subtotalCents={subtotalCents}
-        onClear={clear}
-        onRemove={removeLine}
-        onCheckout={handleCheckout}
-      />
+      {/* Lista escaneada con grid responsive */}
+      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <ScannedList
+          items={items}
+          subtotalCents={subtotalCents}
+          onClear={clear}
+          onRemove={removeLine}
+          onCheckout={handleCheckout}
+        />
+      </div>
     </div>
   );
 }
