@@ -11,6 +11,8 @@ import Carrito from "../pages/Carrito";
 import Pedidos from "../pages/Pedidos.jsx";
 import Login from "../pages/Login.jsx";
 import Register from "../pages/Register.jsx";
+import NoEncontrados from "../pages/NoEncontrados.jsx";
+
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -38,6 +40,8 @@ export default function App() {
             <NavLink className="nav-link" to="/tienda">Tienda</NavLink>
             <NavLink className="nav-link" to="/carrito">Carrito</NavLink>
             <NavLink className="nav-link" to="/pedidos">Pedidos</NavLink>
+            <NavLink className="nav-link" to="/noencontrados">No Encontrados</NavLink>
+
           </>
         );
       case "trabajador":
@@ -72,6 +76,7 @@ export default function App() {
             <Route path="/tienda" element={<Tienda />} />
             <Route path="/carrito" element={<Carrito />} />
             <Route path="/pedidos" element={<Pedidos />} />
+            <Route path="/noencontrados" element={<NoEncontrados />} />
             <Route path="*" element={<div>404</div>} />
           </>
         );
