@@ -136,6 +136,7 @@ export default function CodigosBarra() {
 
       {/* Lista escaneada con grid responsive */}
       <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {/* Lista escaneada (a lo largo, no en grid) */}
         <ScannedList
           items={items}
           subtotalCents={subtotalCents}
@@ -143,6 +144,7 @@ export default function CodigosBarra() {
           onRemove={removeLine}
           onCheckout={handleCheckout}
         />
+
       </div>
     </div>
   );
